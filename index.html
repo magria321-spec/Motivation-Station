@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivation Station</title>
+    
+<style>
+
+    /* RADIO ARTWORK */
+
+.radio-image {
+    width: 100%;
+    max-width: 850px;
+    height: auto;
+    display: block;
+    margin: 0 auto 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px #ff4fd855;
+}
+    /* MAIN PAGE */
+    body {
+        background: #101020;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* TOP HEADER */
+    header {
+        padding: 35px 20px;
+        background: #191933;
+        border-bottom: 3px solid #00e5ff;
+    }
+
+    header h1 {
+        color: #ff4fd8;
+        font-size: 42px;
+        letter-spacing: 5px;
+        text-shadow: 0 0 12px #ff4fd8;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        color: #00e5ff;
+        letter-spacing: 3px;
+        font-size: 13px;
+    }
+
+    /* MAIN CONTENT */
+    .motivation-clip {
+        max-width: 650px;
+        margin: 80px auto;
+        padding: 60px 30px;
+        background:  rgba(16, 16, 32, 0.32);
+        border: 1px solid #ff4fd8;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px #ff4fd8;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+        .motivation-clip h2 {
+        color: #ffcc33;
+        font-size: 44px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 12px #ffcc33;
+    }
+
+    /* PLAY BUTTON */
+    button {
+        background: #ff4fd8;
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        margin-top: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 0 15px #ff4fd8;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #00e5ff;
+        color: #101020;
+        box-shadow: 0 0 25px #00e5ff;
+        transform: scale(1.05);
+    }
+
+    .secondary-button {
+        background: transparent;
+        color: #00e5ff;
+        border: 1px solid #00e5ff;
+        padding: 10px 18px;
+        margin-top: 15px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        box-shadow: none;
+    }
+
+    .secondary-button:hover {
+        background: #00e5ff;
+        color: #101020;
+        box-shadow: 0 0 12px #00e5ff;
+        transform: scale(1.03);
+
+    }
+
+    /* FOOTER */
+    footer {
+        color: #00e5ff;
+        letter-spacing: 3px;
+        font-size: 13px;
+        margin-top: 60px;
+    }
+
+    
+/* FEATURED MOTIVATION */
+
+.motivation-clip h3 {
+    color: #00e5ff;
+    letter-spacing: 3px;
+}
+
+/* PLAY BUTTON LINK */
+
+.play-button {
+    display: inline-block;
+    background: #ff4fd8;
+    color: white;
+    text-decoration: none;
+    padding: 18px 35px;
+    margin-top: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #ff4fd8;
+}
+
+.play-button:hover {
+    background: #00e5ff;
+    color: #101020;
+}
+
+/* SONG OF THE DAY */
+
+.song-of-day {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #ffffff55;
+}
+
+.song-of-day h3 {
+    color: #ffcc33;
+    letter-spacing: 3px;
+    font-size: 16px;
+}
+
+.song-of-day p {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.song-of-day a {
+    color: #00e5ff;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.song-of-day a:hover {
+    color: #ff4fd8;
+    text-shadow: 0 0 10px #ff4fd8;
+}
+
+
+/* JUST TUNES RADIO */
+
+#tunesDisplay {
+    max-width: 750px;
+    margin: 60px auto;
+    padding: 35px 25px;
+    background: linear-gradient(145deg, #191933, #101020);
+    border: 2px solid #00e5ff;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #00e5ff55;
+}
+
+#tunesDisplay h2 {
+    color: #ff4fd8;
+    font-size: 28px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 12px #ff4fd8;
+}
+
+#tunesDisplay p {
+    color: #00e5ff;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+#tunesDisplay iframe {
+    border: 2px solid #ff4fd8;
+    box-shadow: 0 0 20px #ff4fd855;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>MOTIVATION STATION</h1>
+        <p>YOUR DAILY DOSE OF MOTIVATION</p>
+    </header>
+    <button id="justTunesButton">♫ JUST TUNES</button>
+
+    <div id="tunesDisplay" style="display: none;">
+
+    <img src="images/radio-bg.png" alt="Motivation Station Radio" class="radio-image">
+
+    <h2>♫ MOTIVATION STATION RADIO ♫</h2>
+
+    <p>YOUR SOUNDTRACK. YOUR MOMENT.</p>
+
+    <iframe
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/playlist/64IOFskE87xuR7icuvRygA?utm_source=generator"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+    </iframe>
+
+</div>
+
+    <div id="motivationDisplay"></div>
+
+
+    <footer>
+        <p>NO EXCUSES. NO QUITTING.</p>
+    </footer>
+
+<script>
+    
+// All motivational content lives here
+const motivations = [
+    {
+        title: "GET BACK UP.",
+        source: "ROCKY BALBOA (2006)",
+        message: "Go out and get what you're worth!",
+        link: "https://youtu.be/D_Vg4uyYwEk?t=57",
+        image: "images/get-what-youre-worth.png",
+        song: "Eye of the Tiger",
+        songLink: "https://www.youtube.com/watch?v=btPJPFnesV4&list=RDbtPJPFnesV4&start_radio=1",
+    },
+
+    {
+        title: "THERE IS NO TOMORROW!",
+        source: "ROCKY 3 (1982)",
+        message: "There is no tomorrow!",
+        link: "https://www.youtube.com/watch?v=8KRzqPxR5zs",
+        image: "images/there-is-no-tomorrow.png",
+        song: "GONNA FLY NOW",
+        songLink: "https://www.youtube.com/watch?v=DhlPAj38rHc&list=RDDhlPAj38rHc&start_radio=1"
+    },
+
+    {
+        title: "WHEN LIFE KNOCKS YOU DOWN",
+        source: "SYLVESTER STALLONE",
+        message: "Keep moving forward, no matter how difficult things get.",
+        link: "https://www.youtube.com/watch?v=E0NSGL9dODM",
+        image: "images/keep-moving-forward.png",
+        song: "Burning Heart",
+        songLink: "https://www.youtube.com/watch?v=ZtpTOTi2jqo",
+    },
+
+    {
+        title: "THE TIME IS NOW",
+        source: "ROCKY 4 (1985)",
+        message: "NO MORE HOLDING BACK",
+        link: "https://youtu.be/OGnROlocoG0?t=22",
+        image: "images/the-time-is-now.png",
+        song: "Hearts on Fire",
+        songLink: "https://www.youtube.com/watch?v=swo51-CG9Ss&list=RDswo51-CG9Ss&start_radio=1",
+    },
+
+    {
+        title: "I DIDN'T HEAR NO BELL",
+        source: "ROCKY 5 (1990)",
+        message: "YOU'RE STILL A FIGHTER",
+        link: "https://youtu.be/zBMgvcN-1mc?t=19",
+        image: "images/youre-still-a-fighter.png",
+        song: "Going the Distance",
+        songLink: "https://www.youtube.com/watch?v=FLI7jJOQS5k&list=RDFLI7jJOQS5k&start_radio=1",
+    },
+
+    {
+        title: "YOU WILL NEVER BE READY",
+        source: "DENZEL WASHINGTON",
+        message: "DO WHAT YOU HAVE TO DO",
+        link: "https://www.youtube.com/watch?v=ORuE7rU_548",
+        image: "images/do-what-you-have-to-do.png",
+        song: "Till I Collapse",
+        songLink: "https://www.youtube.com/watch?v=Obim8BYGnOE&list=RDObim8BYGnOE&start_radio=1",
+    },
+
+    {
+        title: "KEEP KNOCKING",
+        source: "SYLVESTER STALLONE",
+        message: "KEEP KNOCKING, EVENTUALLY THEY OPEN THE DOOR",
+        link: "https://www.youtube.com/watch?v=E0NSGL9dODM",
+        image: "images/keep-knocking.png",
+        song: "Invincible",
+        songLink: "https://www.youtube.com/watch?v=5A4xBp2rizQ&list=RD5A4xBp2rizQ&start_radio=1",
+    },
+
+    {
+        title: "",
+        source: "THE KARATE KID (1984)",
+        message: "",
+        link: "https://www.youtube.com/watch?v=YKYDg5upGFQ",
+        image: "images/miagi.png",
+        song: "Youre the Best Around",
+        songLink: "https://www.youtube.com/watch?v=p44G0U4sLCE&list=RDp44G0U4sLCE&start_radio=1",
+    },
+
+    {
+        title: "WAX ON, WAX OFF",
+        source: "THE KARATE KID (1984)",
+        message: "TRUST THE PROCESS",
+        link: "https://www.youtube.com/watch?v=d618g59NbSU",
+        image: "images/karatekid.png",
+    },
+
+    {
+        title: "YOUR LIMITS ARE NOT WHERE YOU THINK THEY ARE",
+        source: "BLOODSPORT (1988)",
+        message: "TRUST THE PROCESS",
+        link: "https://www.youtube.com/watch?v=d618g59NbSU",
+        image: "images/bloodsport.png",
+        song: "Push it to the Limit",
+        songLink: "https://www.youtube.com/watch?v=9D-QD_HIfjA&list=RD9D-QD_HIfjA&start_radio=1",
+    },
+
+    {
+        title: "PROVE WHAT YOU ARE CAPABLE OF",
+        source: "MULAN (1998)",
+        message: "STOP DOUBTING WHAT YOU CAN BECOME",
+        link: "https://youtu.be/vGfJeW_CcFY?t=31",
+        image: "images/keep-knocking.png",
+        song: "I'll make a man out of you",
+        songLink: "https://www.youtube.com/watch?v=elBKil5zE2g&list=RDelBKil5zE2g&start_radio=1",
+    },
+
+    {
+        title: "HAVE A VISION",
+        source: "ARNOLD SCHWARZENEGGER",
+        message: "THINK BIG, IGNORE THE NAYSAYERS, WORK YOUR ASS OFF",
+        link: "https://www.youtube.com/watch?v=pRQTAnfSD5s",
+        image: "images/arnold.png",
+    },
+
+    {
+        title: "",
+        source: "",
+        message: "",
+        link: "https://www.youtube.com/watch?v=vGFAjwtjlPc&list=RDvGFAjwtjlPc&start_radio=1",
+        song: "Thunder in your Heart",
+        image: "",
+    },
+];
+
+// Find the empty container in our HTML
+const display = document.getElementById("motivationDisplay");
+
+const today = new Date().toDateString();
+
+const savedDate = localStorage.getItem("motivationDate");
+const savedIndex = localStorage.getItem("motivationIndex")
+
+let currentIndex;
+
+if (savedDate === today && savedIndex !== null) {
+    currentIndex = Number(savedIndex);
+}
+else {
+    currentIndex = Math.floor(Math.random() * motivations.length);
+
+    localStorage.setItem("motivationDate", today);
+    localStorage.setItem("motivationIndex", currentIndex);
+}
+
+// Show a motivation
+function showMotivation() {
+
+    const selected = motivations[currentIndex];
+
+    display.innerHTML = `
+        <section class="motivation-clip" style="background-image: linear-gradient(rgba(16, 16, 32, 0.25), rgba(16, 16, 32, 0.85)), url('${selected.image}')">
+
+            <h2>${selected.title}</h2>
+
+            <h3>${selected.source}</h3>
+
+            <p>${selected.message}</p>
+
+            <a href="${selected.link}" target="_blank" class="play-button">
+                ▶ MOTIVATE ME
+            </a>
+
+            <br>
+
+            <button id="anotherButton" class="secondary-button">
+                GIVE ME ANOTHER
+            </button>
+            ${selected.song ? `
+    <div class="song-of-day">
+        <h3>♫ SONG OF THE DAY</h3>
+        <p>${selected.song}</p>
+
+        <a href="${selected.songLink}" target="_blank">
+            ▶ LISTEN NOW
+        </a>
+    </div>
+` : ""}
+
+        </section>
+    `;
+
+}
+
+// Choose another random motivation
+function getAnotherMotivation() {
+
+    let newIndex;
+
+    do {
+        newIndex = Math.floor(Math.random() * motivations.length);
+    } while (newIndex === currentIndex);
+
+    currentIndex = newIndex;
+    
+    localStorage.setItem("motivationIndex", currentIndex);
+
+    showMotivation();
+}
+
+// Show the first motivation when the page loads
+showMotivation();
+
+// Listen for clicks on the button
+display.addEventListener("click", function(event) {
+
+    if (event.target.id === "anotherButton") {
+        getAnotherMotivation();
+    }
+
+});
+
+// JUST TUNES BUTTON
+const justTunesButton = document.getElementById("justTunesButton");
+const tunesDisplay = document.getElementById("tunesDisplay");
+const motivationDisplay = document.getElementById("motivationDisplay");
+
+justTunesButton.addEventListener("click", function() {
+
+    if (tunesDisplay.style.display === "block") {
+
+        tunesDisplay.style.display = "none";
+        motivationDisplay.style.display = "block";
+        justTunesButton.textContent = "♫ JUST TUNES";
+
+    } else {
+
+        tunesDisplay.style.display = "block";
+        motivationDisplay.style.display = "none";
+        justTunesButton.textContent = "← BACK TO MOTIVATION";
+
+    }
+
+});
+</script>
+</body>
+</html>
