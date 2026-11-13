@@ -392,19 +392,73 @@ const display = document.getElementById("motivationDisplay");
 const today = new Date().toDateString();
 
 const savedDate = localStorage.getItem("motivationDate");
-const savedIndex = localStorage.getItem("motivationIndex")
+const savedIndex = localStorage.getItem("motivationIndex");
+const savedRemaining = localStorage.getItem("motivationRemaining");
 
 let currentIndex;
+let remainingIndices = [];
 
-if (savedDate === today && savedIndex !== null) {
-    currentIndex = Number(savedIndex);
+// Shuffle all slides except the one currently showing
+function createShuffledPool(excludeIndex) {
+
+    let pool = motivations
+        .map((_, index) => index)
+        .filter(index => index !== excludeIndex);
+
+    for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    return pool;
 }
-else {
+
+// Restore today's slide and remaining shuffle pool
+if (
+    savedDate === today &&
+    savedIndex !== null &&
+    Number.isInteger(Number(savedIndex)) &&
+    Number(savedIndex) >= 0 &&
+    Number(savedIndex) < motivations.length
+) {
+
+    currentIndex = Number(savedIndex);
+
+    try {
+        const parsed = JSON.parse(savedRemaining);
+
+        if (
+            Array.isArray(parsed) &&
+            parsed.every(index =>
+                Number.isInteger(index) &&
+                index >= 0 &&
+                index < motivations.length &&
+                index !== currentIndex
+            ) &&
+            new Set(parsed).size === parsed.length
+        ) {
+            remainingIndices = parsed;
+        } else {
+            remainingIndices = createShuffledPool(currentIndex);
+        }
+
+    } catch {
+        remainingIndices = createShuffledPool(currentIndex);
+    }
+
+} else {
+
     currentIndex = Math.floor(Math.random() * motivations.length);
+    remainingIndices = createShuffledPool(currentIndex);
 
     localStorage.setItem("motivationDate", today);
     localStorage.setItem("motivationIndex", currentIndex);
 }
+
+localStorage.setItem(
+    "motivationRemaining",
+    JSON.stringify(remainingIndices)
+);
 
 // Show a motivation
 function showMotivation() {
@@ -445,18 +499,23 @@ function showMotivation() {
 
 }
 
-// Choose another random motivation
+// Choose another random motivation without repeats
 function getAnotherMotivation() {
 
-    let newIndex;
+    // Start a new round if every slide has been shown
+    if (remainingIndices.length === 0) {
+        remainingIndices = createShuffledPool(currentIndex);
+    }
 
-    do {
-        newIndex = Math.floor(Math.random() * motivations.length);
-    } while (newIndex === currentIndex);
+    // Pick the next slide from the shuffled pool
+    currentIndex = remainingIndices.pop();
 
-    currentIndex = newIndex;
-    
+    // Save our progress
     localStorage.setItem("motivationIndex", currentIndex);
+    localStorage.setItem(
+        "motivationRemaining",
+        JSON.stringify(remainingIndices)
+    );
 
     showMotivation();
 }
