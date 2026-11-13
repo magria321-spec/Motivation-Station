@@ -2,6 +2,7 @@
 {
     "name": "Motivation Station",
     "short_name": "Motivation",
+    "id": "/Motivation-Station/",
     "description": "Your daily dose of motivation",
     "start_url": "./",
     "scope": "./",
